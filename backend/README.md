@@ -34,11 +34,14 @@ sudo apt-get install python3 python3-venv python3-pip postgresql nginx
 sudo su postgres
 psql
 ALTER USER postgres WITH PASSWORD '2312';
-CREATE DATABASE my_cloud;
+CREATE DATABASE mycloud;
 \q
 exit
 ```
-- Клонировать в корень папки вашего пользователя репозиторий с проектом,  
+- Клонировать в корень папки вашего пользователя репозиторий с проектом, перейти в папку MyCloud/backend  
+```bash
+cd MyCloud/backend
+```
 настроить виртуальное окружение Python и установить пакеты из requirements.txt
 ```bash
 python3 -m venv venv
@@ -51,7 +54,7 @@ python manage.py migrate
 python manage.py loaddata loaddata.json
 ```
 --------------------------------------------------------------------
-4. Настроить gunicorn:  
+1. Настроить gunicorn:  
 ```bash
 sudo nano /etc/systemd/system/gunicorn.service
 ```
@@ -62,11 +65,11 @@ Description=gunicorn
 After=network.target
 
 [Service]
-User/Shapaev
-WorkingDirectory=/home/Shapaev/My_cloud/backend
-ExecStart=/home/Shapaev/My_cloud/backend/venv/bin/gunicorn --access-logfile -\
+User=Shapaev
+WorkingDirectory=/home/Shapaev/MyCloud/backend
+ExecStart=/home/Shapaev/MyCloud/backend/venv/bin/gunicorn --access-logfile -\
     --workers=3 \
-    --bind unix:/home/Shapaev/My_cloud/backend/backend/project.sock backend.wsgi:application
+    --bind unix:/home/Shapaev/MyCloud/backend/backend/project.sock backend.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
@@ -89,10 +92,10 @@ sudo nano /etc/nginx/sites-available/mycloud
 server {
     listen 80;
     server_name 79.174.81.35;
-    root /home/Shapaev/My_cloud/frontend/build;
+    root /home/Shapaev/MyCloud/frontend/build;
 
     location /media/ {
-        alias /home/Shapaev/My_cloud/backend/backend/media/;
+        alias /home/Shapaev/MyCloud/backend/backend/media/;
         default_type "image/jpg";
     }
     location / {
@@ -100,17 +103,25 @@ server {
     }
     location /api/ {
         include proxy_params;
-        proxy_pass http://unix:/home/Shapaev/My_cloud/backend/backend/project.sock;
+        proxy_pass http://unix:/home/Shapaev/MyCloud/backend/backend/project.sock;
     }
     location /a/ {
         include proxy_params;
-        proxy_pass http://unix:/home/Shapaev/My_cloud/backend/backend/project.sock;
+        proxy_pass http://unix:/home/Shapaev/MyCloud/backend/backend/project.sock;
     }
 }
 ```
 - Создать ссылку на конфигурацию
 ```bash
-sudo ln -s /etc/nginx/sites-available/mycloud/etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/mycloud /etc/nginx/sites-enabled
+```
+- Дать Nginx полные права
+```bash
+sudo ufw allow 'Nginx Full'
+```
+- Собрать в папку статические файлы для доступа Nginx
+```bash
+python manage.py collectstatic
 ```
 - Настроить максимальный размер файла для загрузки:
 ```bash
