@@ -1,1 +1,29 @@
 
+2025-07-27 10:22:36,306 django.request WARNING  Forbidden: /api/gd
+2025-07-27 10:22:36,306 django.request WARNING  Forbidden: /api/gd
+2025-07-27 10:23:07,359 django.request WARNING  Forbidden: /api/gd
+2025-07-27 10:23:07,359 django.request WARNING  Forbidden: /api/gd
+2025-07-27 10:23:31,286 app.views INFO     Регистрация нового аккаунта:
+2025-07-27 10:23:32,576 django.request WARNING  Forbidden: /api/gd
+2025-07-27 10:23:32,576 django.request WARNING  Forbidden: /api/gd
+2025-07-27 10:23:35,843 app.views INFO     Аутентификация.
+2025-07-27 10:23:36,061 app.views INFO     Запрос данных своего аккаунта id:2
+2025-07-27 10:23:43,952 app.views INFO     Загрузка файла на сервер id:2.
+2025-07-27 10:23:48,487 app.views INFO     Сохранение файла на клиенте id:2
+2025-07-27 10:32:52,973 app.views INFO     Запрос данных своего аккаунта id:2
+2025-07-27 10:32:53,099 app.views INFO     Запрос данных своего аккаунта id:2
+2025-07-27 10:32:55,643 app.views INFO     Обратная аутентификация.
+2025-07-27 10:32:55,700 django.request WARNING  Forbidden: /api/gd
+2025-07-27 10:32:55,700 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:02:31,895 django.request WARNING  Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-07-27 12:02:31,895 django.request WARNING  Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-07-27 12:16:02,619 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:02,619 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:04,787 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:04,787 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:05,052 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:05,052 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:12,317 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:12,317 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:14,047 django.request WARNING  Forbidden: /api/gd
+2025-07-27 12:16:14,047 django.request WARNING  Forbidden: /api/gd

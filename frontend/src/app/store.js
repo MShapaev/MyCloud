@@ -13,9 +13,11 @@ export const store = configureStore({
     app: appReducer,
     user: userReducer,
     cloud: cloudReducer,
-    admin: adminReducer,
+    admin: adminReducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware)
 });
 
 sagaMiddleware.run(saga);
+

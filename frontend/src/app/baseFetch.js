@@ -2,15 +2,24 @@ import localforage from 'localforage';
 import { saveAs } from 'file-saver';
 
 // Базовая функция запросов на сервер
-export default async function baseFetch({ url, method, headers, body, out, file, del, fUrl, }) {
-  const status = [200, 201, 204, 400, 403, 404, 409, ];
+export default async function baseFetch({
+  url,
+  method,
+  headers,
+  body,
+  out,
+  file,
+  del,
+  fUrl
+}) {
+  const status = [200, 201, 204, 400, 403, 404, 409];
   try {
     const response = await fetch(url, {
       method: method,
       headers: headers,
-      body: body,
+      body: body
     });
-    
+
     // Проверка контролируемых ответов сервера
     if (!status.includes(response.status)) {
       throw new Error(response.statusText);
@@ -24,11 +33,11 @@ export default async function baseFetch({ url, method, headers, body, out, file,
     // Отмена аутентификации(выход)
     // БЫЛО ДО ЗАПРОСА
     if (out) {
-      await localforage.setItem('sessionToken', undefined);
+      await localforage.setItem("sessionToken", undefined);
       return;
     }
 
-    // Сохранение 
+    // Сохранение
     if (file) {
       if (response.status === 403) {
         return await response.json();
@@ -46,10 +55,20 @@ export default async function baseFetch({ url, method, headers, body, out, file,
       //Получение оригинального имени файла из заголовка 'Content-Disposition'
       let fileName;
 
-      if (decodeURIComponent(response.headers.get('Content-Disposition')).includes('filename*')) {
-        fileName = decodeURIComponent(response.headers.get('Content-Disposition').split("''")[1]);
+      if (
+        decodeURIComponent(
+          response.headers.get("Content-Disposition")
+        ).includes("filename*")
+      ) {
+        fileName = decodeURIComponent(
+          response.headers.get("Content-Disposition").split("''")[1]
+        );
       } else {
-        fileName = decodeURIComponent(response.headers.get('Content-Disposition')).split("=")[1].replaceAll('"', '');
+        fileName = decodeURIComponent(
+          response.headers.get("Content-Disposition")
+        )
+          .split("=")[1]
+          .replaceAll('"', "");
       }
 
       const blob = await response.blob();
@@ -60,11 +79,12 @@ export default async function baseFetch({ url, method, headers, body, out, file,
 
     // Получение токена сессии после успешной аутентификации
     if (result.sessionToken) {
-      await localforage.setItem('sessionToken', result.sessionToken);
+      await localforage.setItem("sessionToken", result.sessionToken);
     }
-    
+
     return result;
-  } catch(err) {
+  } catch (err) {
     throw new Error(err.message);
   }
 }
+

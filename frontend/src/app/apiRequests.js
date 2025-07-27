@@ -7,9 +7,9 @@ import baseFetch from './baseFetch';
 export async function registration(data) {
   return baseFetch({
     url: process.env.REACT_APP_REGISTRATION_URL,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', },
-    body: JSON.stringify(data),
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
   });
 }
 
@@ -17,9 +17,9 @@ export async function registration(data) {
 export async function login(data) {
   return baseFetch({
     url: process.env.REACT_APP_LOGIN_URL,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', },
-    body: JSON.stringify(data),
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
   });
 }
 
@@ -27,8 +27,8 @@ export async function login(data) {
 export async function isAdmin() {
   return baseFetch({
     url: process.env.REACT_APP_ISADMIN_URL,
-    method: 'GET',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
+    method: "GET",
+    headers: { Authorization: await localforage.getItem("sessionToken") }
   });
 }
 
@@ -36,8 +36,8 @@ export async function isAdmin() {
 export async function getPerson() {
   return baseFetch({
     url: process.env.REACT_APP_GET_AUTH_URL,
-    method: 'GET',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
+    method: "GET",
+    headers: { Authorization: await localforage.getItem("sessionToken") }
   });
 }
 
@@ -45,9 +45,9 @@ export async function getPerson() {
 export async function logout() {
   return baseFetch({
     url: process.env.REACT_APP_LOGOUT_URL,
-    method: 'GET',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
-    out: true,
+    method: "GET",
+    headers: { Authorization: await localforage.getItem("sessionToken") },
+    out: true
   });
 }
 
@@ -55,9 +55,9 @@ export async function logout() {
 export async function loadAvatar(formData) {
   return baseFetch({
     url: process.env.REACT_APP_CHANGE_PERSON_URL,
-    method: 'PATCH',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
-    body: formData,
+    method: "PATCH",
+    headers: { Authorization: await localforage.getItem("sessionToken") },
+    body: formData
   });
 }
 
@@ -65,12 +65,12 @@ export async function loadAvatar(formData) {
 export async function changePersonData(data) {
   return baseFetch({
     url: process.env.REACT_APP_CHANGE_PERSON_URL,
-    method: 'PATCH',
+    method: "PATCH",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': await localforage.getItem('sessionToken'),
+      "Content-Type": "application/json",
+      Authorization: await localforage.getItem("sessionToken")
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
 }
 
@@ -78,9 +78,9 @@ export async function changePersonData(data) {
 export async function sendFiles(formData) {
   return baseFetch({
     url: process.env.REACT_APP_UPLOAD_URL,
-    method: 'POST',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
-    body: formData,
+    method: "POST",
+    headers: { Authorization: await localforage.getItem("sessionToken") },
+    body: formData
   });
 }
 
@@ -88,9 +88,9 @@ export async function sendFiles(formData) {
 export async function deleteFile(id) {
   return baseFetch({
     url: process.env.REACT_APP_DELETE_URL + id,
-    method: 'DELETE',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
-    del: true,
+    method: "DELETE",
+    headers: { Authorization: await localforage.getItem("sessionToken") },
+    del: true
   });
 }
 
@@ -98,9 +98,9 @@ export async function deleteFile(id) {
 export async function getFile(id, fileName) {
   return baseFetch({
     url: process.env.REACT_APP_DOWNLOAD_URL + id,
-    method: 'GET',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
-    file: fileName,
+    method: "GET",
+    headers: { Authorization: await localforage.getItem("sessionToken") },
+    file: fileName
   });
 }
 
@@ -108,8 +108,8 @@ export async function getFile(id, fileName) {
 export async function getDownloadURL(id) {
   return baseFetch({
     url: process.env.REACT_APP_GET_FILE_URL + id,
-    method: 'GET',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
+    method: "GET",
+    headers: { Authorization: await localforage.getItem("sessionToken") }
   });
 }
 
@@ -117,17 +117,18 @@ export async function getDownloadURL(id) {
 export async function getFileByLink(params) {
   return baseFetch({
     url: process.env.REACT_APP_GET_FILE_BY_LINK + params,
-    method: 'GET',
-    fUrl: true,
+    method: "GET",
+    fUrl: true
   });
 }
 
-// Функция для изменения имени/комментария файла 
+// Функция для изменения имени/комментария файла
 export async function changeFile(id, data) {
   return baseFetch({
     url: process.env.REACT_APP_CHANGE_FILE_URL + id,
-    method: 'PATCH',
-    headers: { 'Authorization': await localforage.getItem('sessionToken'), },
-    body: JSON.stringify(data),
+    method: "PATCH",
+    headers: { Authorization: await localforage.getItem("sessionToken") },
+    body: JSON.stringify(data)
   });
 }
+

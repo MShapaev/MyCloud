@@ -2,8 +2,23 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../slices/appSlice';
 import { loadPersonData, resetPersonData } from '../slices/userSlice';
-import { addUserFiles, changeView, deleteFocusOnFile, hideDeleteConfirm, hideShareURL, resetCloud, saveDownloadURL } from '../slices/cloudSlice';
-import { deleteFocusOnAcc, hideAddModal, hideChangeModal, hideDelete, loadData, resetAdmin} from '../slices/adminSlice';
+import {
+  addUserFiles,
+  changeView,
+  deleteFocusOnFile,
+  hideDeleteConfirm,
+  hideShareURL,
+  resetCloud,
+  saveDownloadURL
+} from '../slices/cloudSlice';
+import {
+  deleteFocusOnAcc,
+  hideAddModal,
+  hideChangeModal,
+  hideDelete,
+  loadData,
+  resetAdmin
+} from '../slices/adminSlice';
 import { useNavigate } from 'react-router-dom';
 import localforage from 'localforage';
 
@@ -14,10 +29,10 @@ export function useLogin({ person, data }) {
     dispatch(login());
     dispatch(loadPersonData(person));
     dispatch(addUserFiles(person.files));
-    if(data) {
+    if (data) {
       dispatch(loadData(data));
     }
-  },[dispatch, person, data]);
+  }, [dispatch, person, data]);
 }
 
 //Хук очистки данных состояний при обратной аутентификации(выход)
@@ -28,7 +43,7 @@ export function useLogout() {
     dispatch(resetPersonData());
     dispatch(resetCloud());
     dispatch(resetAdmin());
-  },[dispatch]);
+  }, [dispatch]);
 }
 
 //Хук обработки кликов для снятия фокуса с файла/пользователя
@@ -36,7 +51,12 @@ export function useOutsideFileClick() {
   const dispatch = useDispatch();
   useEffect(() => {
     const handleOutsideFileClick = (e) => {
-      if ((e.target.closest('.btn')) || (e.target.closest('.file')) || (e.target.closest('.modal')) || (e.target.closest('.user'))) {
+      if (
+        e.target.closest(".btn") ||
+        e.target.closest(".file") ||
+        e.target.closest(".modal") ||
+        e.target.closest(".user")
+      ) {
         return;
       }
       dispatch(deleteFocusOnAcc());
@@ -47,12 +67,12 @@ export function useOutsideFileClick() {
       dispatch(hideAddModal());
       dispatch(hideChangeModal());
       return;
-    }
+    };
 
-    document.addEventListener('click', handleOutsideFileClick);
+    document.addEventListener("click", handleOutsideFileClick);
     return () => {
-      document.removeEventListener('mousedown', handleOutsideFileClick);
-    }
+      document.removeEventListener("mousedown", handleOutsideFileClick);
+    };
   }, [dispatch]);
 }
 
@@ -61,12 +81,12 @@ export function useGetURL(fetch) {
   const dispatch = useDispatch();
   const cloudState = useSelector((state) => state.cloud);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     (async () => {
       const response = await fetch(cloudState.onFocus);
       if (response.error) {
-        return navigate('/');
+        return navigate("/");
       }
       dispatch(saveDownloadURL(response.url));
     })();
@@ -79,10 +99,10 @@ export function useGetView() {
 
   useEffect(() => {
     (async () => {
-      if (await localforage.getItem('view')) {
+      if (await localforage.getItem("view")) {
         return dispatch(changeView());
       }
       return;
     })();
-  }, [dispatch])
+  }, [dispatch]);
 }

@@ -1,0 +1,919 @@
+{
+    "zabbix_export": {
+        "version": "7.0",
+        "template_groups": [
+            {
+                "uuid": "3dcd5bbe90534f9e8eb5c2d53756af63",
+                "name": "Templates/Power"
+            }
+        ],
+        "templates": [
+            {
+                "uuid": "a62c9ff54a024ab39ad2d8484512e241",
+                "template": "Impulse",
+                "name": "Impulse",
+                "groups": [
+                    {
+                        "name": "Templates/Power"
+                    }
+                ],
+                "items": [
+                    {
+                        "uuid": "bb10ed94eb444d2c839e8caf41329110",
+                        "name": "Impulse: Battery Capacity (%)",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.2.4.0",
+                        "key": "BatteryCapacity",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "%",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "57c25572311d448e816e0415a951cd17",
+                        "name": "Impulse: Status BatteryDischarge",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.16.0",
+                        "key": "BatteryDischarge",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "cb632eead612404b8d72d3dc055c78ae",
+                                "expression": "last(/Impulse/BatteryDischarge)<>1",
+                                "name": "Impulse: Battery discharge",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "440486607c454a659c65b8204ec86aa1",
+                        "name": "Impulse: Status BatteryEOD",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.9.0",
+                        "key": "BatteryEOD",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "b21fc495680e4cfc9c10d12b19c7472a",
+                                "expression": "last(/Impulse/BatteryEOD)<>1",
+                                "name": "Impulse: Battery end of discharge",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a88376f52c5b45f588e3d85ec8124938",
+                        "name": "Impulse: Status BatteryFault",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.8.0",
+                        "key": "BatteryFault",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "fb668bbe87824dc1a714af7c3c4a1cd9",
+                                "expression": "last(/Impulse/BatteryFault)<>1",
+                                "name": "Impulse: Battery fault",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "691edd04b1194c6cb630f63ed3654d28",
+                        "name": "Impulse: Battery Status",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.2.1.0",
+                        "key": "BatteryStatus",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "cbb59d7036824b4eafbce60546089a67",
+                                "expression": "last(/Impulse/BatteryStatus)<>2",
+                                "name": "Impulse: Battary Status",
+                                "priority": "DISASTER",
+                                "description": "unknown \t(1),\t \n \tbatteryNormal (2),\t \n \tbatteryLow (3),\t \n \tbatteryDepleted (4)"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "4b34466eaa394f7ba87291821564a26b",
+                        "name": "Impulse: Battery Voltage",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.2.5.0",
+                        "key": "BatteryVoltage",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "V",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "7660e85decbd4de3948aec3e8ad85484",
+                        "name": "Impulse: Status BatteryVoltLow",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.10.0",
+                        "key": "BatteryVoltLow",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "b67ddae79bae48669d998c31cb4fe8ce",
+                                "expression": "last(/Impulse/BatteryVoltLow)<>1",
+                                "name": "Impulse: Battery volt low",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "bc374c1ecccc4dfc9756eb5147aad68c",
+                        "name": "Impulse: Status BypassFault",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.4.0",
+                        "key": "BypassFault",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "fb7bb566fa604de1bb25f3811e11e791",
+                                "expression": "last(/Impulse/BypassFault)<>1",
+                                "name": "Impulse: Bypass fault",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "0de1e727a87740389a9690431e341abe",
+                        "name": "Impulse: Status CommunicationLost",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.1.0",
+                        "key": "CommunicationLost",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "cae721b97fdb4fbcb144b0a555d2de09",
+                                "expression": "last(/Impulse/CommunicationLost)<>1",
+                                "name": "Impulse: Communication lost",
+                                "priority": "AVERAGE"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "4b27c4a5fa7f4597ae1c747176ab56eb",
+                        "name": "Impulse: Status EmergencyPowerOff",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.3.0",
+                        "key": "EmergencyPowerOff",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "1f6e34142e2f4f4098de646b5f455fbc",
+                                "expression": "last(/Impulse/EmergencyPowerOff)<>1",
+                                "name": "Impulse: Emergency power off",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "b12db719f0f742e48593731e615e2cdb",
+                        "name": "Impulse: Status FanFault",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.7.0",
+                        "key": "FanFault",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "8c9172d96f93494aa5fa06300e75bc26",
+                                "expression": "last(/Impulse/FanFault)<>1",
+                                "name": "Impulse: Fan fault",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "9134e8f9ba1243a88f739e747251bb5d",
+                        "name": "Impulse: Firmware Version UPS",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.1.3.0",
+                        "key": "FirmwareUPS",
+                        "delay": "40320s",
+                        "history": "7d",
+                        "value_type": "TEXT",
+                        "trends": "0",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Inventory Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "79671e3dc85845d38e0200ae6616e522",
+                        "name": "Impulse: Firmware Version Card",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.1.4.0",
+                        "key": "FirmwareVersionCard",
+                        "delay": "40320s",
+                        "history": "7d",
+                        "value_type": "TEXT",
+                        "trends": "0",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Inventory Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "ec8985ae9a224a81828d6f9dcbbd76d7",
+                        "name": "Impulse: Status InputFault",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.5.0",
+                        "key": "InputFault",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "4e2a2917451946faa855ec2b5bf52489",
+                                "expression": "last(/Impulse/InputFault)<>1",
+                                "name": "Impulse: Input fault",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "52337dee33b248f2a18c73d335ce75f1",
+                        "name": "Impulse: Input Frequency",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.3.3.1.2.1",
+                        "key": "InputFrequency",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "Hz",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "960968df40c742a3b59724b11453b73b",
+                        "name": "Impulse: Input Voltage",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.3.3.1.3.1",
+                        "key": "InputVoltage",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "V",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "54c332594dfc445d87aff718599b7323",
+                                "expression": "last(/Impulse/InputVoltage)<180",
+                                "name": "Impulse: No Input Voltage",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "450cf514d45c475bbba145532d8af15a",
+                        "name": "Impulse: Status IntegratedAlarm",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.2.0",
+                        "key": "IntegratedAlarm",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "ae1b92e58e5e4273a647639b8b97d839",
+                                "expression": "last(/Impulse/IntegratedAlarm)<>1",
+                                "name": "Impulse: Integrated alarm",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "c1770d07b8c5428f884830d2eadc3348",
+                        "name": "Impulse: Status InverterFault",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.12.0",
+                        "key": "InverterFault",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "4aa5b347e71f4041b107b62eac76ff02",
+                                "expression": "last(/Impulse/InverterFault)<>1",
+                                "name": "Impulse: Inverter fault",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "28e4de235c3d4bb59af165e282934113",
+                        "name": "Impulse: Status MaintOverTime",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.15.0",
+                        "key": "MaintOverTime",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "b4084b2e1dd34036854969d259be553f",
+                                "expression": "last(/Impulse/MaintOverTime)<>1",
+                                "name": "Impulse: Maint over time",
+                                "priority": "AVERAGE"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "2996348add184929b55075594d4f1aa3",
+                        "name": "Impulse: Status MaintSwitchOn",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.18.0",
+                        "key": "MaintSwitchOn",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "89941213ba20432ea9089d47a4e7bfd6",
+                                "expression": "last(/Impulse/MaintSwitchOn)<>1",
+                                "name": "Impulse: Maint switch on",
+                                "priority": "AVERAGE"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a09153511cf544b9a406d9563ff63b3f",
+                        "name": "Impulse: Model",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.1.2.0",
+                        "key": "ModelUPS",
+                        "delay": "40320s",
+                        "history": "7d",
+                        "value_type": "TEXT",
+                        "trends": "0",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Inventory Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "f6e46257036f4ebcb11e4b7094fb607a",
+                        "name": "Impulse: Status OutputFault",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.6.0",
+                        "key": "OutputFault",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "dc2c1ac25a934a47ac12455fdcee7e86",
+                                "expression": "last(/Impulse/OutputFault)<>1",
+                                "name": "Impulse: Output fault",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "15f6cef879ea474d8b1397ea007c15e5",
+                        "name": "Impulse: Output Frequency",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.4.2.0",
+                        "key": "OutputFrequency",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "dHz",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "d87f289822054855a5da239e5718afca",
+                        "name": "Impulse: Output Load (%)",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.4.4.1.5.1",
+                        "key": "OutputLoad",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "%",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "be4700d9cc074fbcb5b5a8a948619aad",
+                                "expression": "last(/Impulse/OutputLoad)>80",
+                                "name": "Impulse: Output Load Too High - {HOST.NAME}",
+                                "priority": "WARNING"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "395348b4ff984d6d8f6070f0fe5a12e5",
+                        "name": "Impulse: Status OutputOverLoad",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.13.0",
+                        "key": "OutputOverLoad",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "ddd0cfd8c1f54132a1cfb755b2ea362a",
+                                "expression": "last(/Impulse/OutputOverLoad)<>1",
+                                "name": "Impulse: Output over load",
+                                "priority": "AVERAGE"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "057ca6ddf8bc4e388de3d0fc0541df7c",
+                        "name": "Impulse: Output Power",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.4.4.1.4.1",
+                        "key": "OutputPower",
+                        "delay": "5s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "W",
+                        "preprocessing": [
+                            {
+                                "type": "MULTIPLIER",
+                                "parameters": [
+                                    "0.001"
+                                ]
+                            }
+                        ],
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "9790eb39fa0f458f8cd27038f315d5e8",
+                        "name": "Impulse: Status OutputShortCircuit",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.14.0",
+                        "key": "OutputShortCircuit",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "9eea9c5c953c47b583930e472b40bf06",
+                                "expression": "last(/Impulse/OutputShortCircuit)<>1",
+                                "name": "Impulse: Output short circuit",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "eab36664b3c74275bf2ac4ec22d2de47",
+                        "name": "Impulse: Output Voltage",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.4.4.1.2.1",
+                        "key": "OutputVoltage",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "V",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a7bdefa273bc4894a8c0954d64f39bc2",
+                        "name": "Impulse: Status OverTemperature",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.19.0",
+                        "key": "OverTemperature",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "947e0ee463984164882eced1a97f903f",
+                                "expression": "last(/Impulse/OverTemperature)<>1",
+                                "name": "Impulse: Over temperature",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "37ad93a8d5924c25b0cb2b0e37d9ab91",
+                        "name": "Impulse: Status RectifierFault",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.11.0",
+                        "key": "RectifierFault",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "a1c1f995349f411084298c23a462bdbe",
+                                "expression": "last(/Impulse/RectifierFault)<>1",
+                                "name": "Impulse: Rectifier fault",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "a7b253c7405b4725b669262647c4be49",
+                        "name": "Impulse: Run Time Remaining",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.2.3.0",
+                        "key": "RunTimeRemaining",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "Min",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "84a6740e6be642b0aac7a25887df03e9",
+                                "expression": "max(/Impulse/RunTimeRemaining,60s)<5",
+                                "name": "Impulse: Battary ieft: < 5 minutes - {HOST.NAME}",
+                                "priority": "DISASTER"
+                            },
+                            {
+                                "uuid": "ce918936a6854b14ad68c8a784863a24",
+                                "expression": "max(/Impulse/RunTimeRemaining,120s)<10",
+                                "name": "Impulse: Battary ieft: < 10 minutes - {HOST.NAME}",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "d0db2e745432475095c6dfb8cba90419",
+                        "name": "Impulse: Status SourceOnBypass",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.4.1.60967.1.2.3.8.17.0",
+                        "key": "SourceOnBypass",
+                        "delay": "30s",
+                        "history": "7d",
+                        "valuemap": {
+                            "name": "Alerts from host"
+                        },
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Alert status"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "323482096c7245d8a20ba16dde70d40e",
+                                "expression": "last(/Impulse/SourceOnBypass)<>1",
+                                "name": "Impulse: Source on bypass",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "bd25cc06dc9b4fb081bfbd9a8bc1f384",
+                        "name": "Impulse: SysUpTime Network",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.1.3.0",
+                        "key": "SysUpTime",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "uptime",
+                        "description": ".1.3.6.1.2.1.25.1.1.0\n.1.3.6.1.2.1.1.3.0",
+                        "preprocessing": [
+                            {
+                                "type": "MULTIPLIER",
+                                "parameters": [
+                                    "0.01"
+                                ]
+                            }
+                        ],
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "87f66c31305c4f8bac2881bb8b5b42e8",
+                        "name": "Impulse: SysUpTime Hardware",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.25.1.1.0",
+                        "key": "SysUpTimeHardware",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "uptime",
+                        "description": ".1.3.6.1.2.1.25.1.1.0\n.1.3.6.1.2.1.1.3.0",
+                        "preprocessing": [
+                            {
+                                "type": "MULTIPLIER",
+                                "parameters": [
+                                    "0.01"
+                                ]
+                            }
+                        ],
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "f148ae38897b4f20b8a889faf8a360a2",
+                                "expression": "last(/Impulse/SysUpTimeHardware)>=0\nand\nlast(/Impulse/SysUpTimeHardware)<10m",
+                                "name": "Impulse: Host has been restarted",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "4b4c575359794b0491c259e72faae225",
+                        "name": "Impulse: Temperature",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.2.7.0",
+                        "key": "Temperature",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "C",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "uuid": "583478ae52ca4805992e404fd6df0ec9",
+                                "expression": "last(/Impulse/Temperature)>=70",
+                                "name": "Impulse: MAX Temperature Overhead - {HOST.NAME}",
+                                "priority": "DISASTER"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e451e9e2eb9e4819b8a72818f2ec59cd",
+                        "name": "Impulse: TimeOnBattery",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": ".1.3.6.1.2.1.33.1.2.2.0",
+                        "key": "TimeOnBattery",
+                        "delay": "30s",
+                        "history": "7d",
+                        "value_type": "FLOAT",
+                        "units": "Min",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Batary Data"
+                            }
+                        ]
+                    }
+                ],
+                "discovery_rules": [
+                    {
+                        "uuid": "476e7ea3f38d4db385c1e231ca1cf2ac",
+                        "name": "Alerts discovery",
+                        "type": "SNMP_AGENT",
+                        "snmp_oid": "walk[.1.3.6.1.4.1.60967.1.2.3.8]",
+                        "key": "alerts.discovery",
+                        "delay": "1h",
+                        "status": "DISABLED"
+                    }
+                ],
+                "valuemaps": [
+                    {
+                        "uuid": "6eed6a2910184e22b1c78afa518ca815",
+                        "name": "Alerts from host",
+                        "mappings": [
+                            {
+                                "value": "1",
+                                "newvalue": "normal"
+                            },
+                            {
+                                "value": "0",
+                                "newvalue": "none"
+                            },
+                            {
+                                "value": "2",
+                                "newvalue": "alert"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

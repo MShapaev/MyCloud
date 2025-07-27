@@ -1,6 +1,7 @@
 from django.urls import path
 
-from app.views import get_all, get_one, change_one, registration, delete_one, AdminFile, get_url_admin
+from app.views import get_all, get_one, change_one, registration,\
+      delete_one, AdminFile, get_url_admin
 
 admin_patterns = [
     path('ga', get_all),

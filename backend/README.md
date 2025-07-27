@@ -38,7 +38,7 @@ CREATE DATABASE mycloud;
 \q
 exit
 ```
-- Клонировать в корень папки вашего пользователя репозиторий с проектом, перейти в папку MyCloud/backend  
+- Клонировать в корень папки вашего пользователя репозиторий с проектом, перейти в папку проекта MyCloud/backend  
 ```bash
 cd MyCloud/backend
 ```
@@ -54,7 +54,7 @@ python manage.py migrate
 python manage.py loaddata loaddata.json
 ```
 --------------------------------------------------------------------
-1. Настроить gunicorn:  
+4. Настроить gunicorn:  
 ```bash
 sudo nano /etc/systemd/system/gunicorn.service
 ```
@@ -66,6 +66,7 @@ After=network.target
 
 [Service]
 User=Shapaev
+Group=www-data
 WorkingDirectory=/home/Shapaev/MyCloud/backend
 ExecStart=/home/Shapaev/MyCloud/backend/venv/bin/gunicorn --access-logfile -\
     --workers=3 \
@@ -119,10 +120,6 @@ sudo ln -s /etc/nginx/sites-available/mycloud /etc/nginx/sites-enabled
 ```bash
 sudo ufw allow 'Nginx Full'
 ```
-- Собрать в папку статические файлы для доступа Nginx
-```bash
-python manage.py collectstatic
-```
 - Настроить максимальный размер файла для загрузки:
 ```bash
 sudo nano /etc/nginx/nginx.conf
@@ -141,3 +138,4 @@ sudo systemctl status nginx
 sudo nano /var/log/nginx/access.log
 sudo nano /var/log/nginx/error.log
 ```
+Теперь можно запустить сайт в браузере по адресу [text](http://79.174.81.35/)
